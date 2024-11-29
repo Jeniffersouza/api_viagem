@@ -1,15 +1,25 @@
 package com.api.demo;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table; // Adicionando a importação correta para a anotação @Table
+
+@Entity
+@Table(name = "destino") // Agora a anotação será reconhecida
 public class Destino {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nome;
-    private String localizacao;
-    private String descricao;
-    private double avaliacaoMedia;
-    private int numeroAvaliacoes;
 
-     // Getters e Setters
+    private String nome; // Nome do destino
+    private String localizacao; // Localização do destino
+    private String descricao; // Descrição do destino
+    private double avaliacaoMedia; // Avaliação média do destino
+    private int numeroAvaliacoes; // Quantidade de avaliações recebidas
+
+    // Getters e Setters
     public Long getId() {
         return id;
     }
@@ -57,5 +67,4 @@ public class Destino {
     public void setNumeroAvaliacoes(int numeroAvaliacoes) {
         this.numeroAvaliacoes = numeroAvaliacoes;
     }
-    
 }
