@@ -9,10 +9,12 @@ Este projeto é uma API RESTful desenvolvida em Java com Spring Boot para gerenc
 A API permite:
 1. **Cadastrar Destinos de Viagem**
 2. **Listar Todos os Destinos**
-3. **Pesquisar Destinos por Nome ou Localização**
+3. **Pesquisar Destinos por Nome **
 4. **Visualizar Informações Detalhadas de um Destino**
-5. **Avaliar um Destino**
-6. **Excluir um Destino**
+5. **Excluir um Destino**
+6. **Listar usuario**
+7. **Cadastrar usuario**
+   
 
 ---
 
@@ -26,8 +28,8 @@ A API permite:
 ### **Passos para Rodar**
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/seu-usuario/api-viagem.git
-   cd api-viagem
+   git clone https://github.com/Jeniffersouza/api_viagem.git
+   cd api_viagem
 
 
 Compile e rode o projeto usando o Maven:
@@ -36,59 +38,70 @@ mvn spring-boot:run
 
 O servidor estará disponível na URL:
 
-http://localhost:8080
+http://localhost:8081
 
-
+--- POR FAVOR USAR OS EXEMPLOS DO BODY, NÃO TEM MUITAS VALIDAÇÕES AINDA
 Endpoints Disponíveis
-1. Cadastrar Destino
-Método: POST
-URL: /api/destinos
-Body (JSON):
 
+
+1. Cadastrar usuario
+Método: POST
+URL: /api/usuarios/cadastrar
+Body (JSON):
 {
-  "nome": "Paris",
-  "localizacao": "França",
-  "descricao": "A cidade das luzes",
-  "avaliacaoMedia": 0.0,
-  "numeroAvaliacoes": 0
+  "username": "novo_usuario",
+  "password": "senha_forte",
+  "perfil": "ADMIN"
 }
 
 
-2. Listar Todos os Destinos
+----
+2. Cadastrar destino
+Método: POST
+URL: /api/destinos
+Auth: basic com o username e password  q vc cadastrou, admin/user (tanto faz)
+Body (JSON):
+{
+  "nome": "criciuma",
+  "localizacao": "Brasil",
+  "descricao": "capital do oeste de sc",
+  "avaliacaoMedia": 7.5,
+  "numeroAvaliacoes": 2
+}
+
+
+3. Listar Todos os Destinos
 Método: GET
 URL: /api/destinos
 
-3. Pesquisar Destino por Nome ou Localização
+3. Pesquisar Destino por Nome 
 Método: GET
-URL: /api/destinos/search
+URL: /api/destinos/pesquisa
 Query Parameters:
-nome ou localizacao
+nome 
 
 exemplo:
 
-http://localhost:8080/api/destinos/search?nome=Paris
+http://localhost:8081/api/destinos/pesquisa?query=chapeco
+
+
 
 4. Visualizar Detalhes de um Destino
 Método: GET
 URL: /api/destinos/{id}
 exemplo:
-http://localhost:8080/api/destinos/1
+http://localhost:8081/api/destinos/1
 
 
-5. Avaliar um Destino
-Método: PATCH
-URL: /api/destinos/{id}/avaliacao
-Query Parameters:
-nota: Nota de 1 a 10.
-
-http://localhost:8080/api/destinos/1/avaliacao?nota=8.5
 
 
-6. Excluir um Destino
+5. Excluir um Destino
 Método: DELETE
-URL: /api/destinos/{id}
+Auth: basic com o usuario q vc cadastrou, admin/user (tanto faz)
+URL: /api/destinos/delete/{id}
+http://localhost:8081/api/destinos/delete/1
 
-http://localhost:8080/api/destinos/1
+-----
 
 
 Tecnologias Utilizadas
